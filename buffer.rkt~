@@ -1,0 +1,37 @@
+#lang eopl
+
+(define list-length
+  (lambda (lst) 
+    (if (null? lst)
+        0
+        (+ 1 (list-length (cdr lst)))
+        )))
+
+(define nth-elem
+  (lambda (lst n)
+    (if (eq? lst '())
+        '()
+        (if (zero? n)
+            (car lst)
+            (nth-elem (cdr lst) (- n 1))
+        ))))
+
+(define remove-first
+  (lambda (sym lst)
+    (if (eq? '() lst)
+        lst
+        (if (eq? (car lst) sym)
+            (cdr lst)
+            (cons (car lst) (remove-first sym (cdr lst)))
+            ))))
+
+(define remove
+  (lambda (sym lst)
+    (if (eq? '() lst)
+        lst
+        (if (eq? (car lst) sym)
+            (remove sym (cdr lst))
+            (cons (car lst) (remove sym (cdr lst)))
+            ))))
+
+
